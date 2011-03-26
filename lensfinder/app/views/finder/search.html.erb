@@ -1,0 +1,8 @@
+<% @search.each do |results| %>
+    <div style="margin: 20px; padding: 20px; border: 1px dotted #ccc">
+          Pris: <%= results.price %><br/>
+          Företag: <%= results.retailer.title %><br/>
+          Frakt: <%= results.retailer.profile.shippingCost %><br/>
+      
+    </div>
+<% end %>

@@ -28,6 +28,15 @@
           <%= label_tag dom_id(category), category.name, :class => "check_box_label" %>
       <% end %>
     </div>
+
+        <div class="field">
+      <%= f.label "Sizes" %><br/>
+      <% for size in Size.all %>
+      <%= check_box_tag 'product[size_ids][]', size.id, @product.size_ids.include?(size.id), :id => dom_id(size) %>
+          <%= label_tag dom_id(size), size.size, :class => "check_box_label" %>
+      <% end %>
+    </div>
+    
   <div class="actions">
     <%= f.submit %>
   </div>

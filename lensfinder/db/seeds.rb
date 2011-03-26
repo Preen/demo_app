@@ -11,7 +11,7 @@ user = User.create  :email => 'nalle@mia.com',
                     :password => 'guessit',
                     :password_confirmation => 'guessit'
 
-Retailer.create [{:title => 'Lensia'}]
+retailer = Retailer.create [{:title => 'Lensia'}]
 
 
 Category.create [ {:name => '2-veckorlinser'},
@@ -30,6 +30,10 @@ Size.create [{:size => '3'},{:size => '6'},{:size => '30'},{:size => '60'},{:siz
 Price.create [{:price => '205', :retailer_id => 1, :size_id => 1, :product_id => 1},
               {:price => '305', :retailer_id => 1, :size_id => 2, :product_id => 1},
               {:price => '405', :retailer_id => 1, :size_id => 3, :product_id => 1}]
+
+retailer2 = Retailer.first
+
+retailer2.create_profile :shippingCost => '305'
 
 user.retailers.create :title => 'Färgadelinser'
 

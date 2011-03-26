@@ -1,7 +1,8 @@
 class Product < ActiveRecord::Base
   validates :title, :uniqueness => true
   belongs_to :user
-  has_many :price
+  has_many :prices
+  has_many :sizes
   has_and_belongs_to_many :categories
 
   has_attached_file :photo,

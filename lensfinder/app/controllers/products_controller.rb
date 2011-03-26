@@ -16,10 +16,11 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    @price = @product.prices
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml { render :xml => @product }
+      format.xml { render :xml => @price }
     end
 
   end

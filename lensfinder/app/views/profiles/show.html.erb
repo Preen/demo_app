@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Url:</b>
+  <%= @profile.url %>
+</p>
+
+<p>
+  <b>Shippingcost:</b>
+  <%= @profile.shippingCost %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @profile.body %>
+</p>
+
+<p>
+  <b>Retailer:</b>
+  <%= @profile.retailer_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_profile_path(@profile) %> |
+<%= link_to 'Back', profiles_path %>

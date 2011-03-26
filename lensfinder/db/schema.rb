@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110322123218) do
+ActiveRecord::Schema.define(:version => 20110325194135) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(:version => 20110322123218) do
     t.integer  "retailer_id"
     t.integer  "size_id"
     t.integer  "product_id"
-    t.string   "price"
+    t.integer  "price",       :limit => 255
     t.integer  "user_id"
   end
 
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(:version => 20110322123218) do
   create_table "profiles", :force => true do |t|
     t.integer  "retailer_id"
     t.string   "url"
-    t.string   "shippingCost"
+    t.integer  "shippingCost"
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(:version => 20110322123218) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "product_id"
   end
 
   create_table "slugs", :force => true do |t|

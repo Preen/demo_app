@@ -3,7 +3,7 @@ class CreateProfiles < ActiveRecord::Migration
     create_table :profiles do |t|
       t.integer :retailer_id
       t.string :url
-      t.string :shippingCost
+      t.integer :shippingCost
       t.text :body
       t.timestamps
     end
