@@ -1,0 +1,111 @@
+<div class="mainWrapper">
+  <h1><%= @title %></h1>
+</div>
+<div id="productSearch">
+  <div class="options">
+    <%= render :partial => 'options' %>
+    <% form_tag({:action => 'search'}, :remote => true) do %>
+        <div id="searchBox">
+
+
+          <div class="chooseOption">
+            <div class="creditCard retailerIcon"></div>
+            <div style="float: left; padding-right: 10px; padding-top: 5px;">Kreditkort</div>
+            <div class="internetBank retailerIcon"></div>
+            <div style="float: left; padding-right: 10px; padding-top: 5px;">Internetbank</div>
+            <div class="prepaid retailerIcon"></div>
+            <div style="float: left; padding-right: 10px; padding-top: 5px;">Postförskott</div>
+            <div class="invoice retailerIcon"></div>
+            <div style="float: left; padding-right: 10px; padding-top: 5px;">Räkning</div>
+
+
+            <div class="right">
+              <span class="infoText">Sortera på:</span>
+              <%= select_tag "choice",
+                             options_for_select(
+                                     ['Namn',
+                                      'Fraktpris',
+                                      'Flest billigast produkter',
+                                      'Betalningsalternativ - Kreditkort',
+                                      'Betalningsalternativ - Internetbank',
+                                      'Betalningsalternativ - Faktura',
+                                      'Betalningsalternativ - Kreditkort']
+                             ) %>
+              <%= submit_tag 'Sortera', :id => 'search' %>
+            </div>
+          </div>
+        </div>
+        <div class="clearBoth"></div>
+    <% end %>
+  </div>
+
+  <div id="results">
+    <table class="results retailers">
+      <thead>
+      <tr>
+        <th>Butik</th>
+        <th>Frakt</th>
+        <th>Billigast produkter</th>
+        <th>Betalningsalternativ</th>
+        <th>Karma</th>
+        <th></th>
+        <% if current_user %>
+            <% if current_user.admin? %>
+                <th></th>
+                <th></th>
+            <% end %>
+        <% end %>
+      </tr>
+      </thead>
+      <tbody>
+      <% @retailers = Retailer.what("profiles.cheapest DESC") %>
+      <% @retailers.each do |retailer| %>
+          <% @retailer = retailer %>
+          <tr>
+            <td><%= link_to retailer.title, retailer %></td>
+            <td><%= number_to_sek(retailer.profile.shippingCost) %></td>
+            <td><%= retailer.profile.cheapest %> st</td>
+            <td>
+              <% if retailer.profile.creditCard %>
+                  <div class="creditCard retailerIcon"></div>
+              <% end %>
+              <% if retailer.profile.internetBank %>
+                  <div class="internetBank retailerIcon"></div>
+              <% end %>
+              <% if retailer.profile.prepaid %>
+                  <div class="prepaid retailerIcon"></div>
+              <% end %>
+              <% if retailer.profile.invoice %>
+                  <div class="invoice retailerIcon"></div>
+              <% end %>
+            </td>
+            <td>
+              <div style="float: left; margin-right: 10px;"><%= retailer.plusminus %></div>
+              <% if current_user %>
+                  <% if current_user.voted_on?(@retailer) %>
+                      <% if current_user.voted_for?(@retailer) %>
+                      <% else %>
+                      <% end %>
+                  <% else %>
+                  <% end %>
+              <% end %>
+
+                                <% form_for retailer, :url => vote_down_retailer_path(@retailer), :remote => true do %>
+                      <%= submit_tag "", :class => 'disLike' %>
+                  <% end %>
+
+
+            </td>
+            <td><%= link_to 'Besök', retailer.profile.url %></td>
+            <% if current_user_admin? %>
+                <td><%= link_to 'Redigera', edit_retailer_path(retailer) %></td>
+                <td><%= link_to 'Ta bort', retailer, :confirm => 'Är du säker? Du kommer att ta bort butiken och alla dess priser.', :method => :delete %></td>
+            <% end %>
+          </tr>
+      <% end %>
+      </tbody>
+
+    </table>
+  </div>
+  <div id="resultsB"></div>
+</div>

@@ -1,0 +1,2 @@
+module AdminPricesHelper
+end

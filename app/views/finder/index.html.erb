@@ -1,0 +1,68 @@
+<% content_for :head do %>
+    <%= javascript_include_tag 'finder' %>
+<% end %>
+
+
+<div id="instructionsOptions">
+  <div id="instructions">
+    <span class="resultsHeader">Gör såhär</span>
+    <ol>
+      <li>Välj kategori</li>
+      <li>Välj produkt</li>
+      <li>Välj storlek på paketet</li>
+      <li>Välj hur många du vill köpa</li>
+      <li>Klicka på sök</li>
+    </ol>
+  </div>
+  <div id="options">
+
+    <span class="resultsHeader">Dina inställningar</span>
+    <% form_tag({:action => 'search'}, :remote => true) do %>
+        <div class="chooseOption">
+          <span>
+            <label for="category_id">Kategori</label>
+            <%= collection_select('category', 'id', @categories, :id, :name,
+                                  {:prompt => "Välj en kategori"}) %>
+          </span>
+                      <span>
+              <label for="prod_id">Produkt</label>
+                        <%= select_tag "prod_id", options_for_select(["-"]) %>
+            </span>
+
+          <div class="clearBoth"></div>
+
+        </div>
+        <div class="chooseOption">
+
+          <span>
+          <label for="si_id">Storlek på paket</label>
+            <%= select_tag "si_id", options_for_select(["-"]) %>
+          </span>
+                 <span>
+          <label for="amount">Antal paket</label>
+                   <%= select_tag "amount", options_for_select(["-"]) %>
+            </span>
+          <span>
+          <label for="limit">Resultat</label>
+            <%= select_tag "limit", options_for_select([1, 3, 5, "alla"]) %>
+          </span>
+        </div>
+
+        </div>
+        </div>
+
+        <div class="mainWrapper">
+          <div id="instructionsOptionsB">
+            <div id="searchButton"><%= submit_tag 'Sök' %></div>
+    <% end %></div>
+    </div>
+
+    <div id="results">
+      <div id="resultsInfo"><span class="noResults">Här visas resultatet av din sökning</span></div>
+      <%= render 'search' %>
+    </div>
+    <div id="resultsB"></div>
+
+    <div class="mainWrapper">
+      <div id="productInfo"><%= render :partial => 'products/search', :locals => {:product => @product} %></div>
+    </div>

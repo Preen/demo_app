@@ -1,0 +1,10 @@
+<%= div_for price do %>
+    <h3>
+      <%= link_to price.price, price %>
+      <span class="actions">
+        <%= link_to "Edit", edit_price_path(price) %>
+        <%= link_to "Delete", price, :confirm => "Are you sure?", :method => :delete %>
+      </span>
+    </h3>
+    <%= price.price %>
+<% end %>

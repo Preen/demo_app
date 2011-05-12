@@ -1,0 +1,55 @@
+<div class="results">
+  <% if @prices.nil? %>
+      <h4>Inget att visa</h4>
+  <% else %>
+
+      <span class="resultsHeader">Resultat: </span><span class="resultsInfo"> <%= @prices.first.product.title %>
+      <%= @prices.first.product.sizes.first.productSize %> st <span class="x">X</span> <%= @amount %> paket</span>
+      <table class="results">
+        <thead>
+        <tr>
+          <th>Total</th>
+          <th>Pris per lins</th>
+          <th>Pris per paket</th>
+          <th>Frakt</th>
+          <th>Återförsäljare</th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><%= number_to_sek((@best.price * @amount) + @best.retailer.profile.shippingCost) %></td>
+          <td><%= number_to_sek(((@best.price * @amount) + @best.retailer.profile.shippingCost)/(@best.size.productSize * @amount)) %></td>
+          <td><%= number_to_sek(@best.price) %></td>
+          <td><%= number_to_sek(@best.retailer.profile.shippingCost) %></td>
+          <td><%= link_to @best.retailer.title, @best.retailer %></td>
+          <td>
+            <button type="button">Köp</button>
+          </td>
+          <td></td>
+        </tr>
+        <!--#% paginate @prices %!-->
+        <% @prices.each do |results| %>
+            <% if results.retailer.id == @best.retailer.id %>
+            <% else %>
+
+
+                <tr>
+                  <td><%= number_to_sek((results.price * @amount) + results.retailer.profile.shippingCost) %></td>
+                  <td><%= number_to_sek(((results.price * @amount) + results.retailer.profile.shippingCost)/(results.size.productSize * @amount)) %></td>
+                  <td><%= number_to_sek(results.price) %></td>
+                  <td><%= number_to_sek(results.retailer.profile.shippingCost) %></td>
+                  <td><%= link_to results.retailer.title, results.retailer %></td>
+                  <td>
+                    <button type="button">Köp</button>
+                  </td>
+                  <td></td>
+                </tr>
+            <% end %>
+        <% end %>
+  <% end %>
+
+  </tbody>
+  </table>
+</div>

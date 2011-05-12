@@ -1,0 +1,58 @@
+<%= form_for([@user], :remote => true, :html => {:style => 'display: none;'}) do |f| %>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div id="newUser">
+      <div class="field">
+        <%= f.label 'Användarnamn' %>
+        <br/>
+        <%= f.text_field :username %>
+      </div>
+      <div class="field">
+        <%= f.label 'E-post' %>
+        <br/>
+        <%= f.text_field :email %>
+      </div>
+      <div class="field">
+        <%= f.label 'Lösenord' %>
+        <br/>
+        <%= f.password_field :password %>
+      </div>
+      <div class="field">
+        <%= f.label 'Repetera lösenordet' %>
+        <br/>
+        <%= f.password_field :password_confirmation %>
+      </div>
+    </div>
+
+    <div id="comment">
+      <%= f.fields_for :comments do |p| %>
+          <div class="field">
+            <%= p.label 'Kommentar' %>
+            <br/>
+            <%= p.text_area :body %>
+          </div>
+          <div class="field">
+            <%= p.hidden_field :user_id %>
+            <%= p.hidden_field :retailer_id %>
+
+            <%= p.hidden_field :product_id %>
+          </div>
+      </div>
+      <% end %>
+
+
+      <div class="actions">
+        <%= f.submit 'Registrera mig & lägg till kommentar' %>
+      </div>
+<% end %>
+

@@ -1,0 +1,14 @@
+centerPopup();
+loadPopup();
+
+$('#popupContent').html('');
+
+        $('#popupContent').append('<div style="text-align: center; margin: 20px;"><span class="notice">Loggar ut...</span><br/><br/><img src="/images/layout/white_loader.gif" alt="Loggar in dig"></div>');
+        var loggedIn = $('#loggedIn');
+        loggedIn.remove();
+        var userNav = $('#userNav');
+        $(userNav).append("<%= escape_javascript(render 'layouts/logged_in') %>");
+
+        setTimeout(function() {
+            location.reload();
+        }, 1000);

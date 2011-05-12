@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title>Lensfinder</title>
+  <%= render 'layouts/stylesheets' %>
+  <%= javascript_include_tag 'jquery-1.5.1.min', 'rails' %>
+  <%= javascript_include_tag 'jquery.uniform.min' %>
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'jquery.qtip-1.0.0-rc3.min' %>
+  <%= yield(:head) %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+<div id="wrapper">
+  <%= render 'layouts/header' %>
+
+  <section><%= yield %></section>
+  <div class="mainWrapper" style="height: 40px;"></div>
+</div>
+
+<%= render 'layouts/footer' %>
+
+</body>
+</html>

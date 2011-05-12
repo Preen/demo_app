@@ -1,0 +1,5 @@
+<div class="mainWrapper"><% @tagged_retailers.each do |retailers| %>
+    <h2><%= link_to "#{retailers.title}", retailers%></h2>
+    <%= truncate(retailers.profile.body, :length => 150).html_safe %>
+    <%= link_to "#{retailers.title}", retailers%>
+<% end %></div> 

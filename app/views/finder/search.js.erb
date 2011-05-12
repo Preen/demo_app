@@ -1,0 +1,35 @@
+if ('.results') {
+    $('#results').children().fadeOut('fast');
+    $('#results').children().remove();
+    $('#results').append('<div id="resultsInfo"></div>');
+    $('#resultsInfo').append('<div style="text-align: center; display: none;"  id="loader"><img id="blueLoader" src="/images/layout/blue_loader.gif" alt="loading"></div>');
+    $('#loader').fadeIn();
+}
+        if ('.error') {
+            $('.error').remove();
+        }
+
+        $('#results').append("<%= escape_javascript render(:partial => 'finder/search/') %>");
+
+        setTimeout(function() {
+            $('#finalResults').slideDown(function() {
+
+            });
+
+            $('#resultsInfo').slideUp(function() {
+
+            });
+        }, 1000);
+
+
+
+        if ('.productInfo') {
+            $('.productInfo').remove();
+        }
+
+        $("<%= escape_javascript render(:partial => 'products/search', :locals => { :product => @product} ) %>").appendTo('#productInfo');
+
+
+        tooltip('.shippingTip', 'Klicka här för att få information om företaget gällande frakt.', 'mystyle');
+        tooltip('.linkToRetailer', 'Klicka här för att läsa mer om, samt få möjlighet att ge kommentar och betyg på butiken!', 'mystyle');
+        tooltip('.buy', 'Klicka här för att gå vidare till återförsäljaren och köp dina linser!', 'mystyle');

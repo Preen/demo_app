@@ -1,0 +1,105 @@
+<% content_for :head do %>
+    <%= javascript_include_tag 'jquery-ui-1.8.12.custom.min' %>
+    <%= javascript_include_tag 'productIndex' %>
+    <%= stylesheet_link_tag 'jquery-ui/jquery-ui-1.8.12.custom', :media => 'screen' %>
+<% end %>
+
+<div id="leftWidget">
+  <% form_tag({:action => 'update_products'}, :remote => true, :id => 'controllPanel') do %>
+      <h4>Kontrollpanel</h4>
+      Välj antal paket</br><%= select_tag "amount", options_for_select(1..20) %>
+      <%= submit_tag 'Updatera priser', :id => 'Uppdatera' %>
+  <% end %>
+</div>
+
+
+<% Category.all.each do |category| %>
+    <div id="<%= category.name %>" class="category">
+      <div class="blueBar" style="background: #3cf; padding: 0 22px;">
+        <h2 class="noMargin left" style="color: #9ff"><%= category.name %></h2>
+        <span id="mize-<%= category.id %>" style="cursor: pointer; padding-top: 6px;" class="right">Minimera</span>
+
+        <div class="clearBoth"></div>
+      </div>
+      <div id="resultsB"></div>
+      <div id="minimize-<%= category.id %>" class="mainWrapper">
+        <ul class="productList">
+          <% category.products.what_scope(:title, :title).all.each do |product| %>
+              <li class="prodList">
+                <div class="mainFolder">
+                  <h4><%= link_to product.title, product %></h4>
+                  <%= image_tag product.photo.url(:small), :class => 'left' %>
+                  <div class="infoText left">
+                    <%= truncate(product.body, :length => 150).html_safe %>
+                    <%= link_to 'Läs mer', product, :class => 'noBreak' %>
+                  </div>
+                </div>
+                <div class="clearBoth"></div>
+                <% unless product.productSize.count == 1 %>
+                    <div id="<%= product.id %>">
+                      <ul>
+                        <% product.productSize.each do |size| %>
+                            <li>
+                              <a href="#ui-tabs-<%= product.id %><%= size.id %>"><span><%= size.productSize %> st per paket</span></a>
+                            </li>
+                        <% end %>
+                      </ul>
+                      <% product.productSize.each do |psize| %>
+                          <div id="ui-tabs-<%= product.id %><%= psize.id %>">
+                            <div class="productPriceInfo">
+                              <div style="padding: 2%">
+                                <% @price = best_price(product.id, psize.id, 1) %>
+                                <span class="priceInfo left" id="p<%= product.id %>-<%= psize.id %>"><%= number_to_sek(@price.first.price + @price.first.retailer.profile.shippingCost) %></span>
+                        <span class="retailerTitle left" id="r<%= product.id %>-<%= psize.id %>">
+                          - <%= @price.first.retailer.title %>
+                        </span>
+                                <button style="margin-top: 6px;"
+                                        id="b<%= product.id %>-<%= psize.id %>"
+                                        type="button"
+                                        class="buy right"
+                                        onclick="parent.location='<%= retailer_link(@price.first.retailer, @price.first)%>'">Köp</button>
+                              </div>
+                            </div>
+                          </div>
+                      <% end %>
+                    </div>
+                    <script type="text/javascript">
+                        activateTabs(<%= product.id %>)
+                    </script>
+                <% else %>
+                    <div class="sizeTab"><%= product.productSize.first.productSize %>
+                      st per paket
+                    </div>
+                    <div class="productPriceInfo">
+                      <div style="padding: 2%">
+                        <% @price = best_price(product.id, product.productSize.first.id, 1) %>
+                        <span class="priceInfo left" id="p<%= product.id %>-<%= product.productSize.first.id %>"><%= number_to_sek(@price.first.price) %></span>
+                        <span class="retailerTitle left" id="r<%= product.id %>-<%= product.productSize.first.id %>">
+                          - <%= @price.first.retailer.title %>
+                        </span>
+                        <button style="margin-top: 6px;"
+                                id="b<%= product.id %>-<%= product.productSize.first.id %>"
+                                type="button"
+                                class="buy right"
+                                onclick="parent.location='<%= retailer_link(@price.first.retailer, @price.first)%>'">Köp</button>
+                      </div>
+                    </div>
+                <% end %>
+                <% if current_user_admin? %>
+                    <table>
+                      <tr>
+                        <td><%= link_to 'Redigera produkt', edit_product_path(product) %></td>
+                        <td><%= link_to 'Ta bort produkt', product, :confirm => 'Är du säker, du kommer att radera produkten från sidan!?', :method => :delete %></td>
+                      </tr>
+                    </table>
+                <% end %>
+              </li>
+          <% end %>
+        </ul>
+        <div class="clearBoth"></div>
+      </div>
+    </div>
+    <script type="text/javascript">
+        miniMizeActivation(<%= category.id %>);
+    </script>
+<% end %>

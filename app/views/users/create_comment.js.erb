@@ -1,0 +1,21 @@
+$('#pager').prepend("<%= escape_javascript(render 'user_comments') %>");
+$('#new_user').remove();
+$('#pager').append("<%= escape_javascript(render 'new_user_comment') %>");
+//Give the @comment a new comment with the users info and retailers info
+<% @comment = @user.comments.new(:retailer_id => @retailer.id) %>
+        //Insert the new form
+$('<%= escape_javascript(render :partial => 'comments/form') %>').insertAfter("#commentBreak");
+        //remove "Close"
+var hideMe = $('#closeComment').remove();
+        //Create "new Comment"
+var myNewComment = $('<span class="smallHeader" id="nComment">Ny kommentar</span>');
+        //Insert the "new Comment"
+$(myNewComment).insertAfter('#pager');
+var newComment = $('#nComment');
+        //Call the showContent action i comments.js
+showContent(newComment);
+
+var loggedIn = $('#loggedIn');
+loggedIn.remove();
+var userNav = $('#userNav');
+$(userNav).append("<%= escape_javascript(render 'layouts/logged_in') %>");

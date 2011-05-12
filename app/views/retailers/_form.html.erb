@@ -1,0 +1,112 @@
+<div class="mainWrapper">
+  <%= form_for(@retailer) do |f| %>
+      <% if @retailer.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@retailer.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+            <ul>
+              <% @retailer.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+
+      <div id="profileMeta">
+        <div class="field">
+          <%= f.label 'Titel' %>
+          <br/>
+          <%= f.text_field :title %>
+        </div>
+
+        <%= f.fields_for :profile do |p| %>
+            <div class="field">
+              <%= p.label 'www:' %>
+              <br/>
+              <%= p.text_field :url %>
+            </div>
+            <div class="field">
+              <%= p.label 'ProduktAdress' %>
+              <br/>
+              <%= p.text_field :productURL %>
+            </div>
+            <div class="field">
+              <%= p.label 'Frakt' %>
+              <br/>
+              <%= p.text_field :shippingCost %>
+            </div>
+            <div id="paymentInfo">
+              <div class="field">
+                <%= p.label 'Faktura' %>
+                <br/>
+                <%= p.check_box :invoice %>
+              </div>
+              <div class="field">
+                <%= p.label 'Kreditkort'%>
+                <br/>
+                <%= p.check_box :creditCard %>
+              </div>
+              <div class="field">
+                <%= p.label 'Postförskott' %>
+                <br/>
+                <%= p.check_box :prepaid %>
+              </div>
+              <div class="field">
+                <%= p.label 'Internetbank' %>
+                <br/>
+                <%= p.check_box :internetBank %>
+              </div>
+
+
+            </div>
+
+
+            </div>
+
+            <div id="profileInfo">
+              <div class="field">
+                <%= p.label :body %>
+                <br/>
+                <%= p.text_area :body %>
+              </div>
+
+                  <div class="field">
+          <%= f.label 'Tags' %>
+          <br/>
+          <%= f.text_field :keyword_list %>
+        </div>
+        <% end %>
+        </div>
+        <div>
+          <hr/>
+          <h2>Priser</h2>
+          <table cellpadding="0" cellspacing="0">
+            <thead>
+            <tr>
+              <th>Namn</th>
+              <th>Storlek</th>
+              <th>Pris</th>
+              <th>URL</th>
+              <th>Ta bort</th>
+            </tr>
+            </thead>
+            <tbody>
+            <%= f.fields_for :price do |pr| %>
+                <tr>
+                  <td><%= pr.select :product_id, @products.map { |s| [s.title, s.id] }, :disabled => true %></td>
+                  <td><%= pr.select :productSize_id, @size.map { |s| [s.productSize, s.id] }, :disabled => true %></td>
+                  <td><%= pr.text_field :price %></td>
+                  <td><%= pr.text_field :url %></td>
+                  <td><%= pr.check_box :_destroy %></td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+
+          <div class="actions">
+            <%= f.submit %>
+          </div>
+        </div>
+  <% end %>
+
+</div>

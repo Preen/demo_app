@@ -1,0 +1,27 @@
+<h1><%= @title %></h1>
+
+
+<table>
+  <tr>
+    <th>Produkt</th>
+    <th>Storlek</th>
+    <th>Återförsäljare</th>
+    <th>Pris</th>
+    <th></th>
+  </tr>
+
+  <% @prices.each do |price| %>
+  <tr>
+    <td><%= price.product.title %></td>
+    <td><%= price.size.productSize %></td>
+    <td><%= price.retailer.title %></td>
+    <td><%= price.price %> </td>
+    <td><%= link_to 'Show', price %></td>
+    <td><%= link_to 'Edit', edit_price_path(price) %></td>
+    <td><%= link_to 'Destroy', price, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+
+</table>
+
+<%= link_to 'Lägg till nytt pris', new_price_path %>

@@ -1,0 +1,92 @@
+<div class="leftContent left">
+  <div class="infoBox">
+    <div class="infoWrapper">
+      <div class="content">
+        <div class="retailer">
+          <div class="rnfo">
+            <% form_for @retailer do |f| %>
+                <%= f.fields_for :profile do |p| %>
+                  <span style="float: left; width: 50%;"><%= p.check_box :creditCard %> <span>Kreditkort: </span><br/>
+                    <%= p.check_box :invoice %> <span>Räkning: </span></span>
+                  <span style="float: right; width: 50%;"><%= p.check_box :prepaid %> <span>Postförskott: </span><br/>
+                    <%= p.check_box :internetBank %> <span>Internetbank: </span></span>
+                <% end %>
+            <% end %>
+            <div style="clear:both"></div>
+            <br/>
+            <span class="resultsHeader">Frakt:</span>
+            <span class="resultsHeader" style="float: right;"><%= @retailer.profile.shippingCost %> kr</span>
+
+            <div class="clearBoth"></div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="bottom"></div>
+  </div>
+
+  <div class="clearBoth"></div>
+
+  <div class="likeMe">
+    <div class="content">
+      <div class="likeBox"><%= render 'like' %></div>
+    </div>
+    <div class="bottom"></div>
+  </div>
+
+<div class="tags">
+  <h4>Taggar</h4>
+    <div id="tags">
+    <% unless @retailer.keywords.empty? %>
+
+        <% @retailer.keywords.each do |k| %>
+            <%= link_to k.name, {:keyword => k.name, :action => "tagged", :controller => "retailers"} %>
+        <% end %>
+
+    <% end %>
+  </div>
+</div>
+  
+
+
+</div>
+<div class="right" style="width: 655px;">
+  <div id="retailerInfo">
+  <h1>
+    <%= @retailer.title %>
+  </h1>
+
+  <p>
+    <%= @retailer.profile.body.html_safe %>
+  </p>
+</div>
+
+<div id="comments">
+  <div id="pager">
+    <% if any_comments?(@retailer) %>
+        <%= render(:partial => 'comments/index', :locals => {:retailer => @retailer}) %>
+    <% end %>
+  </div>
+  <%= render :partial => "/comments/new" %>
+</div>
+<div id="commentsBottom"></div>
+</div>
+
+<div style="clear:both;"></div>
+
+
+<div class="mainWrapper">
+  <% if current_user %>
+      <% if current_user.admin? %>
+          <%= link_to 'Edit', edit_retailer_path(@retailer) %> |
+          <%= link_to 'Back', retailers_path %>
+      <% end %>
+  <% end %>
+
+</div>
+
+<div class="clearBoth"></div>

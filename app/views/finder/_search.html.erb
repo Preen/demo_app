@@ -1,0 +1,59 @@
+<div id="finalResults" style="display: none;">
+  <% if @prices.nil? %>
+
+  <% else %>
+
+      <span class="resultsHeader"><%= @prices.all.count %>
+        resultat: </span><span class="resultsInfo"> <%= @prices.first.product.title %>
+  , <%= @prices.first.productSize.productSize %> st <span class="x">X</span> <%= @amount %> paket</span>
+
+      <table class="results">
+        <thead>
+        <tr>
+          <th>Totalt</th>
+          <th>Pris per lins</th>
+          <th>Pris per paket</th>
+          <th>Frakt</th>
+          <th>Återförsäljare</th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr>
+          <td><%= number_to_sek((@best.price * @amount) + @best.retailer.profile.shippingCost) %></td>
+          <td><%= number_to_sek_decimals((((@best.price * @amount) + @best.retailer.profile.shippingCost)/(@best.productSize.productSize * @amount))) %></td>
+          <td><%= number_to_sek(@best.price) %></td>
+          <td><%= link_to number_to_sek(@best.retailer.profile.shippingCost), {:controller => "finder", :action => :shipping_info, :id => @best.retailer.id, :format => :js}, :remote => true, :class => 'shippingTip' %></td>
+          <td><%= link_to @best.retailer.title, @best.retailer, :class => 'linkToRetailer' %></td>
+          <td>
+            <button type="button" class="buy" id="cheapest" onclick="parent.location='<%= retailer_link(@best.retailer, @best)%>'">Köp</button>
+          </td>
+          <td></td>
+        </tr>
+        <% @prices.each do |results| %>
+            <% if results.retailer.id == @best.retailer.id %>
+            <% else %>
+
+
+                <tr>
+                  <td><%= number_to_sek((results.price * @amount) + results.retailer.profile.shippingCost) %></td>
+                  <td><%= number_to_sek(((results.price * @amount) + results.retailer.profile.shippingCost)/(results.productSize.productSize * @amount)) %></td>
+                  <td><%= number_to_sek(results.price) %></td>
+                  <td>
+                    <%= link_to number_to_sek(results.retailer.profile.shippingCost), {:controller => "finder", :action => :shipping_info, :id => results.retailer.id, :format => :js}, :remote => true, :class => 'shippingTip' %>
+                  </td>
+                  <td><%= link_to results.retailer.title, results.retailer, :class => 'linkToRetailer' %></td>
+                  <td>
+                    <button type="button" class="buy" onclick="parent.location='<%= retailer_link(results.retailer, results)%>'">Köp</button>
+                  </td>
+                  <td></td>
+                </tr>
+            <% end %>
+        <% end %>
+  <% end %>
+
+  </tbody>
+  </table>
+</div>

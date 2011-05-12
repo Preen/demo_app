@@ -1,0 +1,9 @@
+<div id="loggedIn">
+  <% if current_user %>
+    <%= link_to "Edit Profile", edit_user_path(current_user.id), :class => 'editProfile' %>
+    <%= link_to "Logout", :logout, :class => 'logout', :remote => true %>
+<% else %>
+    <%= link_to "Registera dig", new_user_path, :class => 'register' %>
+    <%= link_to "Logga in", :login, :class => 'login', :remote => true %>
+<% end %>
+</div>

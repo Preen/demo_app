@@ -1,0 +1,12 @@
+$('#popupContent').children().remove();
+
+        $('#popupContent').append('<span class="success">Ditt konto är registrerat och du är inloggad! Sidan kommer att laddas om...</span>');
+
+        var loggedIn = $('#loggedIn');
+        loggedIn.remove();
+        var userNav = $('#userNav');
+        $(userNav).append("<%= escape_javascript(render 'layouts/logged_in') %>");
+
+        setTimeout(function() {
+            location.reload();
+        }, 3000);

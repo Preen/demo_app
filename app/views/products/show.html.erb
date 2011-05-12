@@ -1,0 +1,26 @@
+<% content_for :head do %>
+    <%= javascript_include_tag 'products' %>
+<% end %>
+
+<%= render @product %>
+
+<div id="productSearch"><%= render :partial => 'options' %>
+
+  <div id="results">
+    <div id="resultsInfo"><span class="noResults">Här visas resultatet av din sökning</span></div>
+    <%= render :partial => 'finder/search', :locals => {:si_id => '3', :amount => '1'} %>
+  </div>
+  <div id="resultsB"></div>
+</div>
+
+<div id="comments">
+  <div id="pager">
+    <% if any_comments?(@product) %>
+        <%= render(:partial => 'comments/index', :locals => {:product => @product}) %>
+    <% end %>
+  </div>
+  <%= render :partial => "/comments/new" %>
+</div>
+<div id="commentsBottom"></div>
+
+<div class="clearBoth"></div>

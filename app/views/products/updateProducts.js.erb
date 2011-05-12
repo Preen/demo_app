@@ -1,0 +1,12 @@
+        
+        <% Product.all.each do |product| %>
+            <% product.productSize.each do |size| %>
+                <% @price = best_price(product.id, size.id, params[:amount].to_i) %>
+                <% @new_price = number_to_sek((@price.first.price * params[:amount].to_i) + @price.first.retailer.profile.shippingCost) %>
+                var elem = ('<%= product.id %>-<%= size.id %>');
+                $('#p' + elem).text('<%= @new_price %>');
+                $('#r' + elem).text('- <%= @price.first.retailer.title %>');
+                $('#b' + elem).attr('onClick', "parent.location='<%= retailer_link(@price.first.retailer, @price.first)%>'");
+            <% end %>
+        <% end %>
+

@@ -1,0 +1,29 @@
+<% if current_user %>
+    <%= form_for([@comment], :action => :create, :remote => true, :html => {:style => 'display: none;'}) do |f| %>
+        <% if @comment.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+              <ul>
+                <% @comment.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+        <div class="field">
+          <%= f.text_area :body %>
+        </div>
+        <div class="field">
+          <%= f.hidden_field :user_id %>
+          <%= f.hidden_field :retailer_id %>
+
+          <%= f.hidden_field :product_id %>
+        </div>
+        <div class="actions">
+          <%= f.submit 'Lägg till kommentar' %>
+        </div>
+    <% end %>
+
+
+<% end %>
