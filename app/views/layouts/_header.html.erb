@@ -1,5 +1,5 @@
 <div id="header">
-  <div id="logo">Lensfinder</div>
+  <a href="/"><div id="logo"><%= link_to 'Lensfinder', root_path %></div></a>
   <div id="userNav">
     <%= render 'layouts/logged_in' %>
   </div>
@@ -43,5 +43,16 @@
 
 </div>
 <div class="mainWrapper">
-  <div style="height: 40px;"></div>
+  <div style="min-height: 40px;">
+     <% unless flash.blank?   %>
+        <div id="flash">
+          <% flash.each do |key, value| %>
+              <div class="flash <%= key %>" style="margin-bottom: 0;"><%= value %></div>
+              <br class="clearBoth"/>
+          <% end %>
+        </div>
+        <div class="clearBoth"></div>
+  <% end %>
+  </div>
 </div>
+

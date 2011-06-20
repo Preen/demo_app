@@ -42,6 +42,11 @@
           <%= label_tag dom_id(size), size.productSize, :class => "check_box_label" %>
       <% end %>
     </div>
+
+    <div class="field">
+      <%= f.label "Nyckelord" %>
+      <%= f.text_field :keyword_list %>
+    </div>
     
   <div class="actions">
     <%= f.submit %>

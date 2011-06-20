@@ -4,12 +4,12 @@
         <div class="a">
           <div class="b">
             <div class="body">
-              <div class="commentsTitle"><%= link_to comment.user.username, comment.user %></div>
+              <div class="commentsTitle"><%= comment.user.email %></div>
 
               <p><%= comment.body %></p>
 
               <div class="userInfo">Inlagt för <%= time_ago_in_words(comment.created_at) %> sen
-                av <%= comment.user.username %></div>
+                av <%= comment.user.email %></div>
 
               <% if current_user && current_user.admin? %>
                   <%= link_to 'Destroy', comment, :confirm => 'Are you sure?', :method => :delete, :remote => true %>
@@ -28,12 +28,12 @@
         <div class="a">
           <div class="b">
             <div class="body">
-              <div class="commentsTitle"><%= link_to comment.user.username, comment.user %></div>
+              <div class="commentsTitle"><%= link_to comment.user.email, comment.user %></div>
 
               <p><%= comment.body %></p>
 
               <div class="userInfo">Inlagt för <%= time_ago_in_words(comment.created_at) %> sen
-                av <%= comment.user.username %></div>
+                av <%= comment.user.email %></div>
 
               <% if current_user && current_user.admin? %>
                   <%= link_to 'Destroy', comment, :confirm => 'Are you sure?', :method => :delete, :remote => true %>

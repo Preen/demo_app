@@ -2,10 +2,11 @@
     <%= javascript_include_tag 'comments' %>
 <% end %>
 
+
+<% if current_user %>
 <span class="smallHeader" id="nComment">Ny kommentar</span>
 <br/><br id="commentBreak"/>
-<% if current_user %>
 <%= render 'comments/form' %>
 <% else %>
-<%= render 'comments/new_user_form' %>
+<span class="smallHeader" id="nLComment"><%= link_to 'Ny Kommentar', new_user_session_path, :remote => true %></span>
 <% end %>

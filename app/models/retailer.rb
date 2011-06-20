@@ -3,7 +3,7 @@ class Retailer < ActiveRecord::Base
   belongs_to :user
   has_many :price, :dependent => :destroy
   has_many :comments, :dependent => :destroy
-  has_one :profile
+  has_one :profile, :dependent => :destroy
   accepts_nested_attributes_for :profile
   accepts_nested_attributes_for :price, :reject_if => lambda { |a| a[:price].blank? }, :allow_destroy => true
 

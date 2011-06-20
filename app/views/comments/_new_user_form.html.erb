@@ -1,4 +1,4 @@
-<%= form_for([@user], :remote => true, :html => {:style => 'display: none;'}) do |f| %>
+<%= form_for(:user, :url => registration_path(@user)) do |f| %>
     <% if @user.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@user.errors.count, "error") %> prohibited this comment from being saved:</h2>
@@ -12,11 +12,6 @@
     <% end %>
 
     <div id="newUser">
-      <div class="field">
-        <%= f.label 'Användarnamn' %>
-        <br/>
-        <%= f.text_field :username %>
-      </div>
       <div class="field">
         <%= f.label 'E-post' %>
         <br/>

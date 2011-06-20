@@ -1,4 +1,5 @@
 class FinderController < ApplicationController
+  skip_before_filter :store_location
 
   def index
     @finder     = ''

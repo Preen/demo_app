@@ -1,9 +1,11 @@
 <div id="loggedIn">
   <% if current_user %>
-    <%= link_to "Edit Profile", edit_user_path(current_user.id), :class => 'editProfile' %>
-    <%= link_to "Logout", :logout, :class => 'logout', :remote => true %>
+    <%= link_to "Profil", edit_user_registration_path %>
+     &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+    <%= link_to 'Logga ut', destroy_user_session_path %>
 <% else %>
-    <%= link_to "Registera dig", new_user_path, :class => 'register' %>
-    <%= link_to "Logga in", :login, :class => 'login', :remote => true %>
+        <a href="/auth/facebook/"><div id="connectiWithFaceBookBox">Anslut med Facebook</div></a>
+      | &nbsp;&nbsp;&nbsp;
+    <%= link_to "Logga in", new_user_session_path, :id =>'boxLogin', :remote => true %>
 <% end %>
 </div>

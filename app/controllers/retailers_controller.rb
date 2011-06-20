@@ -58,15 +58,15 @@ class RetailersController < ApplicationController
 
     @products.each do |products|
       if @retailer.price.find_by_product_id(products.id)
-        products.sizes.each do |size|
-          if @retailer.price.find_by_size_id(size.id)
+        products.productSize.each do |size|
+        if @retailer.price.find_by_productSizes_id(size.id)
           else
-            @retailer.price.build(:product_id => products.id, :size_id => size.id)
+            @retailer.price.build(:product_id => products.id, :productSize_id => size.id)
           end
         end
       else
-        products.sizes.each do |size|
-          @retailer.price.build(:product_id => products.id, :size_id => size.id)
+        products.productSize.each do |size|
+          @retailer.price.build(:product_id => products.id, :productSize_id => size.id)
         end
       end
     end
@@ -170,7 +170,7 @@ class RetailersController < ApplicationController
         end
       end
     else
-      render 'users/_register.js.erb'
+      render '/devise/sessions/new.js.erb'
     end
   end
 
@@ -201,6 +201,7 @@ class RetailersController < ApplicationController
   def tagged
     @tags             = Retailer.tag_counts_on(:keywords)
     @tagged_retailers = Retailer.tagged_with(params[:keyword])
+    @tagged_products = Product.tagged_with(params[:keyword])
   end
 
 

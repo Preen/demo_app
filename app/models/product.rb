@@ -26,5 +26,7 @@ class Product < ActiveRecord::Base
   scope :what_scope,
         lambda { |subject,ordering| joins(:productSize, :categories).group(subject).order(ordering)}
 
+  acts_as_taggable
+  acts_as_taggable_on :keywords
 
 end

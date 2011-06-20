@@ -1,0 +1,24 @@
+<div class="loginWithFaceBook">
+  <a href="/auth/facebook" class="auth_provider">
+  <div class="connectWithFaceBook">Logga in med Facebook</div>
+</a>
+</div>
+<div id="activateStandarLoginMethod">
+  Har du inte Facebook? - <span id="activateStandrardLogin">Klicka här.</span>
+</div>
+<div id="loginWithStandardMethod">
+  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+  <p><%= f.label 'E-post' %><br />
+  <%= f.email_field :email %></p>
+
+  <p><%= f.label 'Lösenord' %><br />
+  <%= f.password_field :password %></p>
+
+  <% if devise_mapping.rememberable? %>
+    <p><%= f.check_box :remember_me %> <%= f.label 'Kom ihåg mig' %></p>
+  <% end %>
+
+  <p><%= f.submit "Logga in" %></p>
+<% end %>
+  <%= render :partial => "devise/shared/links" %>
+</div>

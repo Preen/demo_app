@@ -143,6 +143,7 @@ SE:
       odd: "måste vara udda"
       even: "måste vara jämnt"
       record_invalid: "Ett fel uppstod: %{errors}"
+      not_saved: 'Något blev fel'
 
   activerecord:
     errors:
@@ -160,6 +161,19 @@ SE:
 
       full_messages:
         format: "%{attribute} %{message}"
+
+      models:
+        user:
+          attributes:
+            email:
+              not_found: ', den angivna E-postadressen hittades inte i vårt system. Vänligen försök igen.'
+
+    attributes:
+      user:
+        email: 'E-post'
+        password: 'Lösenord'
+        password_confirmation: 'Repetera ditt lösenord'
+        current_password: 'Nuvarande lösenord'
         
 
       # The values :model, :attribute and :value are always available for interpolation
@@ -252,3 +266,20 @@ SE:
         email: "E-post"
         password: "Lösenord"
         remember_me: "Kom ihåg mig"
+  devise:
+    sessions:
+      user:
+        signed_in: 'Du är inloggad'
+        signed_out: 'Du har loggat ut'
+
+      admin:
+        signed_in: 'Du är inloggad som admin!'
+        signed_out: 'Du har loggat ut'
+    registrations:
+      user:
+        destroyed: 'Ditt konto är borttaget.'
+        signed_up: 'Ditt konto är registrerat och du är nu inloggad!'
+    passwords:
+      user:
+        updated: 'Ditt lösenord har blivit uppdaterat!'
+        send_instructions: 'Du skall ha fått ett brev till den angivna E-postadressen med instruktioner om hur du återställer ditt lösenord.'

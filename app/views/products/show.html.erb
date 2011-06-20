@@ -4,6 +4,16 @@
 
 <%= render @product %>
 
+    <div id="tags">
+    <% unless @product.keywords.empty? %>
+
+        <% @product.keywords.each do |k| %>
+            <%= link_to k.name, {:keyword => k.name, :action => "tagged", :controller => "products"} %>
+        <% end %>
+
+    <% end %>
+  </div>
+
 <div id="productSearch"><%= render :partial => 'options' %>
 
   <div id="results">
@@ -12,15 +22,5 @@
   </div>
   <div id="resultsB"></div>
 </div>
-
-<div id="comments">
-  <div id="pager">
-    <% if any_comments?(@product) %>
-        <%= render(:partial => 'comments/index', :locals => {:product => @product}) %>
-    <% end %>
-  </div>
-  <%= render :partial => "/comments/new" %>
-</div>
-<div id="commentsBottom"></div>
 
 <div class="clearBoth"></div>

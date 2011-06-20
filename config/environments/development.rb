@@ -23,5 +23,33 @@ Lensfinder::Application.configure do
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
 
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+
+  require 'openssl'
+
+config.action_mailer.smtp_settings = {
+  :address              => 'smtp.gmail.com',
+  :port                 => '587',
+  :domain               => 'gmail.com',
+  :user_name            => 'philip.mannheimer',
+  :password             => 'Panteras!2',
+  :authentication       => 'plain',
+  :enable_starttls_auto => true,
+  :openssl_verify_mode  => OpenSSL::SSL::VERIFY_NONE,
+}
+
+  # STANDARD MAIL CONFIG
+  #ActionMailer::Base.delivery_method = :smtp
+  #ActionMailer::Base.smtp_settings = {
+  #:enable_starttls_auto => true,
+  #:address => 'mail.compartment.se',
+  #:port => 25,
+  #:domain => "compartment.se",
+  #:user_name => 'c-10910-3',
+  #:password => 'TQWRVa5w5)A',
+  #:authentication => 'plain',
+  #  }
+
 end
 

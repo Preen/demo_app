@@ -29,9 +29,11 @@ section {
 }
 
 #userNav {
-    position: absolute;
-    bottom: 2px;
-    right: 10px;
+    float: right;
+}
+
+#userNav a {
+    text-decoration: none;
 }
 
 #userNav .register {
@@ -486,7 +488,7 @@ TABLE.results tbody tr:nth-child(even) td, tbody tr.even td {
     float: left;
 }
 
-input[type=submit].like, .liked {
+input[type=submit].like, .liked, .like {
     background: url('/images/layout/icons/like.gif') no-repeat 0 0 scroll transparent;
     border: 1px solid #CCCCCC;
     border-radius: 3px 0 0 3px;
@@ -496,6 +498,10 @@ input[type=submit].like, .liked {
     overflow: visible;
     vertical-align: middle;
     white-space: nowrap;
+    padding-left: 25px;
+    min-width: 20px;
+    text-decoration: none;
+    padding-right: 4px;
 }
 
 /*.like span {
@@ -512,15 +518,16 @@ input[type=submit].like, .liked {
 
 } */
 
-input[type=submit].like:hover, .liked {
+input[type=submit].like:hover, .liked, .like:hover {
     background: url("/images/layout/sprites.png") no-repeat scroll 0 -24px transparent;
+    color: #000;
 }
 
 like:focus, like:active {
 
 }
 
-input[type=submit].disLike {
+input[type=submit].disLike, .disLike {
     background: url("/images/layout/sprites.png") no-repeat scroll 0 -48px transparent;
     border: 1px solid #ccc;
     border-left: none;
@@ -535,8 +542,14 @@ input[type=submit].disLike {
     white-space: nowrap;
 }
 
-input[type=submit].disLike:hover {
+input[type=submit].disLike:hover, .disLike:hover {
     border-left: none;
+}
+
+
+.like, .disLike {
+    height: 20px;
+    padding-top: 4px;
 }
 
 /*.disLike img {
@@ -546,8 +559,8 @@ input[type=submit].disLike:hover {
 
 }*/
 
-input[type=submit].disLike:hover {
-    background: url("/images/layout/sprites.png") no-repeat scroll 0 -72px transparent;
+input[type=submit].disLike:hover, .disLike:hover {
+    background: url("/images/layout/sprites.png") no-repeat scroll 0 -72px transparent; !important
 }
 
 .disLiked {
@@ -725,13 +738,21 @@ table.retailers {
     clear: both;
 }
 
-#nComment, #closeComment {
+#nComment, #closeComment, #nLComment a {
     color: #fff;
     left: -10px;
     position: absolute;
     padding-left: 30px;
     background: url('/images/comments/arrowToComments.png') no-repeat 10px 7px;
     cursor: pointer;
+}
+
+#nLComment a {
+    text-decoration: none;
+}
+
+#nLComment a:hover {
+    color: #fff !important;
 }
 
 #newUser {
@@ -865,4 +886,36 @@ table.retailers {
 
 #controllPanel h4 {
     color: #555;
+}
+
+.connectWithFaceBook {
+    background: url('/images/layout/sprites.png') 0 -200px no-repeat;
+    width: 194px;
+    height: 25px;
+    text-indent: -9999px;
+}
+
+#connectiWithFaceBookBox {
+    float: left;
+    background: url('/images/layout/sprites.png') -194px -200px no-repeat;
+    width: 78px;
+    height: 21px;
+    text-indent: -9999px;
+    margin-right: 20px;
+}
+
+#loginWithStandardMethod {
+    margin-top: 30px;
+    border-top: 4px solid #ccc;
+    padding-top: 10px;
+    display: none;
+}
+
+#activateStandarLoginMethod {
+    margin-top: 20px;
+}
+
+#activateStandrardLogin {
+    cursor: pointer;
+    text-decoration: underline;
 }

@@ -1,29 +1,30 @@
 Lensfinder::Application.routes.draw do
 
+  # replace devise_for :users with:
+  devise_for :users,  :controllers => { :registrations => "users/registrations" }
+  
   resources :comments
-
-  resources :authentications
 
   root :to => "finder#index"
 
-  resources :categories, :prices, :profiles, :finder, :products, :users, :user_sessions, :authentications
+  resources :categories, :prices, :profiles, :finder, :users
 
-  resources :retailers do
+  resources :services, :only => [:index, :create]
+
+  resources :retailers, :path => "linsbutiker", do
     member do
       post :vote_up
       post :vote_down
     end
   end
 
-  match 'shipping_info' => 'finder#shipping_info'
+  resources :products, :path => "linser"
 
-  match '/auth/:provider/callback' => 'authentications#create'
+  match 'shipping_info' => 'finder#shipping_info'
 
   match "tagged", :controller => "retailers", :action => "tagged"
 
-  match 'login' => 'user_sessions#new', :as => :login
-
-  match 'logout' => 'user_sessions#destroy', :as => :logout
+  match "tagged", :controller => "products", :action => "tagged"
 
   match "/prices/:id/new/" => "prices#new"
 
@@ -40,5 +41,7 @@ Lensfinder::Application.routes.draw do
   match "/retailers/search/" => "retailers#search"
 
   match "/products/update_products/" => "products#update_products"
+
+  match '/auth/:service/callback' => 'services#create'
 
 end

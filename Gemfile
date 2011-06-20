@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.5'
+gem 'rails', '3.0.7'
 
 gem "friendly_id", "~> 3.2.1"
 
@@ -10,10 +10,7 @@ gem "rmagick", "2.13.1"
 
 gem 'jquery-rails', "0.2.7"
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-gem 'mysql2'
+gem 'mysql2', '0.2.7'
 
 gem 'arel'
 
@@ -25,11 +22,13 @@ gem 'thumbs_up'
 
 gem 'omniauth'
 
-gem 'authlogic'
+gem 'devise'
 
 gem 'acts-as-taggable-on'
 
 gem 'gravatar_image_tag'
+
+gem "actionmailer"
 
 # Use unicorn as the web server
 # gem 'unicorn'

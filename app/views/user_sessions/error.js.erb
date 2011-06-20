@@ -1,7 +1,0 @@
-if ($('.error')){
-    $('.error').remove();
-}
-
-var errorMessages = $('<div class="error"><ul><% @user_session.errors.full_messages.each do |msg| %><li><%= msg %></li><% end %></ul></div>');
-
-$('.tipActivated').prepend(errorMessages);

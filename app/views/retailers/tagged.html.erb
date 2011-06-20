@@ -2,4 +2,10 @@
     <h2><%= link_to "#{retailers.title}", retailers%></h2>
     <%= truncate(retailers.profile.body, :length => 150).html_safe %>
     <%= link_to "#{retailers.title}", retailers%>
-<% end %></div> 
+<% end %></div>
+
+<div class="mainWrapper"><% @tagged_products.each do |products| %>
+    <h2><%= link_to "#{products.title}", products%></h2>
+    <%= truncate(products.body, :length => 150).html_safe %>
+    <%= link_to "#{products.title}", products%>
+<% end %></div>

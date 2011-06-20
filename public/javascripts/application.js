@@ -79,10 +79,18 @@ $(document).ready(function() {
     });
 
 
-    modalWindow('.login', 'Logga in', '');
-    modalWindow('.register', 'Logga in', '');
+    modalWindow('#nLComment', 'Logga in för att kommentera', '');
+    modalWindow('#boxLogin', 'Logga in', '');
+    modalWindow('#loginLikeButton', 'Logga in för att rösta', '');
+    modalWindow('#loginDisLikeButton', 'Logga in för att rösta', '');
+    modalWindow('#register', 'Registrera nytt konto!', '');
 
     $("select, input:checkbox, input:radio, input:file").uniform();
+
+    $('#activateStandrardLogin').click(function(){
+       $('#loginWithStandardMethod').slideDown();
+        $('#activateStandarLoginMethod').slideUp();
+    });
 
 });
 

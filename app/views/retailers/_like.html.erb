@@ -31,14 +31,10 @@
 
       <% end %>
   <% else %>
-      <% form_tag({:action => 'vote_up'}, :remote => true) do %>
-          <%= submit_tag "Gilla #{@retailer.title}!", :class => 'like', :id => 'likeButton' %>
-      <% end %>
 
-      <% form_tag({:action => 'vote_down'}, :remote => true) do %>
-          <%= submit_tag "", :class => 'disLike', :id => 'disLikeButton' %>
-      <% end %>
+       <%= link_to "Gilla #{@retailer.title} ", new_user_session_path, :class => 'like', :id => 'loginLikeButton', :remote => true %>
 
+       <%= link_to " ", new_user_session_path, :class => 'disLike', :id => 'loginDisLikeButton', :remote => true %>
 
   <% end %>
    <div class="clearBoth"></div>
