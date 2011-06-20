@@ -1,0 +1,26 @@
+<% content_for :head do %>
+    <%= javascript_include_tag 'products' %>
+<% end %>
+
+<%= render @product %>
+
+    <div id="tags">
+    <% unless @product.keywords.empty? %>
+
+        <% @product.keywords.each do |k| %>
+            <%= link_to k.name, {:keyword => k.name, :action => "tagged", :controller => "products"} %>
+        <% end %>
+
+    <% end %>
+  </div>
+
+<div id="productSearch"><%= render :partial => 'options' %>
+
+  <div id="results">
+    <div id="resultsInfo"><span class="noResults">Här visas resultatet av din sökning</span></div>
+    <%= render :partial => 'finder/search', :locals => {:si_id => '3', :amount => '1'} %>
+  </div>
+  <div id="resultsB"></div>
+</div>
+
+<div class="clearBoth"></div>

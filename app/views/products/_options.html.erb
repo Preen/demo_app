@@ -1,0 +1,24 @@
+<div class="options">
+  <% form_tag({:controller => :finder, :action => 'search'}, :remote => true, :id => 'pSearch') do %>
+<div id="searchBox">
+      <div class="chooseOption">
+        <span class="infoText">Hitta det billigaste priset för <strong><%= @product.title %></strong></span>
+       <div style="float: right;"> <span>
+              <label for="prod_id">Välj storlekt på paket</label>
+              <%= select_tag :si_id, options_from_collection_for_select(@product.productSize, :id, :productSize) %>
+            </span>
+            <span>
+              <%= hidden_field_tag :prod_id, @product.id %>
+              <label for="category_id">Välj antal paket</label>
+              <%= select_tag "amount", options_for_select(1..20) %>
+            </span>
+       <span>
+          <label for="limit">Resultat</label>
+            <%= select_tag "limit", options_for_select([1, 3, 5, "alla"]) %>
+          </span>
+            <%= submit_tag 'Sök', :id => 'search' %></div>
+    </div>
+</div>
+      <div class="clearBoth"></div>
+<% end %>
+</div>

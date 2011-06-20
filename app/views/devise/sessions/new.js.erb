@@ -1,0 +1,8 @@
+setTimeout(function() {
+    $('.tipActivated').html('');
+    $('.tipActivated').append('<%= escape_javascript(render :partial => "devise/sessions/new") %>');
+    $('#activateStandrardLogin').click(function(){
+       $('#loginWithStandardMethod').slideDown();
+        $('#activateStandarLoginMethod').slideUp();
+    });
+}, 300);

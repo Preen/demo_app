@@ -1,0 +1,58 @@
+<div id="header">
+  <a href="/"><div id="logo"><%= link_to 'Lensfinder', root_path %></div></a>
+  <div id="userNav">
+    <%= render 'layouts/logged_in' %>
+  </div>
+  <div id="notice"></div>
+  <!--<#%= notice %#>-->
+</div>
+<div style="clear: both"></div>
+
+<div id="headerMenu">
+  <ul id="menu">
+    <li class="link"><%= link_to 'Sök', root_path, :class => 'topLinks' %></li>
+    <li class="link">
+      <ul id="navDropDown">
+        <li>
+          <div class="drop"><%= link_to 'Produkter', products_path, :class => 'drop-div' %></div>
+          <div class="dropdown_columns">
+            <% Category.all.each do |category| %>
+                <div class="col">
+                  <h4><%= category.name %></h4>
+                  <ul>
+                    <% category.products.what_scope(:title, :title).all.each do |product| %>
+                        <li class="dropDownList"><%= link_to product.title, product %></li>
+                    <% end %>
+                  </ul>
+                </div>
+            <% end %>
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li class="link"><%= link_to 'Linsbutiker', retailers_path, :class => 'topLinks' %>
+      <ul class="subMenu">
+        <% @retailers = Retailer.what(:title) %>
+        <% @retailers.all.each do |retailer| %>
+            <li class="subMenuList"><%= link_to retailer.title, retailer, :class => 'subMenuLink' %></li>
+        <% end %>
+      </ul>
+
+    </li>
+  </ul>
+
+</div>
+<div class="mainWrapper">
+  <div style="min-height: 40px;">
+     <% unless flash.blank?   %>
+        <div id="flash">
+          <% flash.each do |key, value| %>
+              <div class="flash <%= key %>" style="margin-bottom: 0;"><%= value %></div>
+              <br class="clearBoth"/>
+          <% end %>
+        </div>
+        <div class="clearBoth"></div>
+  <% end %>
+  </div>
+</div>
+

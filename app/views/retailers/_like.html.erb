@@ -1,0 +1,58 @@
+<div id="likeBox">
+ <div id="likeOptions">
+    <% if current_user %>
+      <% if current_user.voted_on?(@retailer) %>
+          <% if current_user.voted_for?(@retailer) %>
+
+              <button class="liked">Du gillar <%= @retailer.title %>!</button>
+              <% form_tag({:action => 'vote_down'}, :remote => true) do %>
+
+                  <%= submit_tag "", :class => 'disLike' %>
+              <% end %>
+
+          <% else %>
+
+              <% form_tag({:action => 'vote_up'}, :remote => true) do %>
+                  <%= submit_tag "Gilla #{@retailer.title}!", :class => 'like' %>
+              <% end %>
+
+              <button class="disLiked"></button>
+
+          <% end %>
+
+      <% else %>
+          <% form_tag({:action => 'vote_up'}, :remote => true) do %>
+              <%= submit_tag "Gilla #{@retailer.title}!", :class => 'like' %>
+          <% end %>
+
+          <% form_tag({:action => 'vote_down'}, :remote => true) do %>
+              <%= submit_tag "", :class => 'disLike' %>
+          <% end %>
+
+      <% end %>
+  <% else %>
+
+       <%= link_to "Gilla #{@retailer.title} ", new_user_session_path, :class => 'like', :id => 'loginLikeButton', :remote => true %>
+
+       <%= link_to " ", new_user_session_path, :class => 'disLike', :id => 'loginDisLikeButton', :remote => true %>
+
+  <% end %>
+   <div class="clearBoth"></div>
+ </div>
+
+
+
+
+  <div id="retailerRating">
+    <div id="likes" style="width: <%= calculate_like(@retailer) %>%; background: #66ff66; height: 15px; float: left;"></div>
+    <div id="disLikes" style="width: <%= calculate_dislike(@retailer) %>%; background: #f99; height: 15px; float: left;"></div>
+    <div class="clearBoth"></div>
+  </div>
+
+  <div id="likeDetails">
+    <%= @retailer.votes_for %> gillar
+    & <%= @retailer.votes_against %> gillar
+    inte <%= @retailer.title %>
+  </div>
+</div>
+

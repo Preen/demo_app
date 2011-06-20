@@ -1,0 +1,4 @@
+$('#pager').children().remove();
+<% if any_comments?(@retailer) %>
+        $('#pager').prepend("<%= escape_javascript( render(:partial => 'comments/index', :locals => { :retailer => @retailer}))%>");
+<% end %>

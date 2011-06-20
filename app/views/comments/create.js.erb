@@ -1,0 +1,14 @@
+$('#pager').prepend("<%= escape_javascript(render(@comment)) %>");
+var success = $('.success');
+        if(!success.length == 0){
+            success.remove();
+        };
+$('#pager').append("<%= escape_javascript(render 'thank_you') %>");
+$('#new_comment').remove();
+<% @comment = @user.comments.new(:retailer_id => @retailer.id) %>
+$('<%= escape_javascript(render :partial => 'comments/form') %>').insertAfter("#commentBreak");
+var hideMe = $('#closeComment').remove();
+var myNewComment = $('<span class="smallHeader" id="nComment">Ny kommentar</span>');
+$(myNewComment).insertAfter('#pager');
+var newComment = $('#nComment');
+showContent(newComment);

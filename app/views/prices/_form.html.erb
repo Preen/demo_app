@@ -1,0 +1,21 @@
+<%= form_tag ({:action => 'new'}) do |f| %>
+
+    <ol>
+      <% for price in @retailer.price %>
+          <% if price.price.nil? %>
+                  <%= text_field_tag "fields[#{(price)}][user]", '', :class => "user_name" %>
+                  <%= radio_button_tag "fields[#{(price)}][is_checked]", '1', false %>
+                  <br>
+          <% else %>
+
+              <%= price.price %>
+
+          <% end %>
+      <% end %>
+    </ol>
+
+    <div class="actions">
+      <%= submit_tag 'pris' %>
+    </div>
+<% end %>
+

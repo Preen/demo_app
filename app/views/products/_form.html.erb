@@ -1,0 +1,54 @@
+<%= form_for(@product, :html => { :multipart => true }) do |f| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+      <ul>
+      <% @product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+
+    <div class="field">
+      <%= f.label :body %><br />
+      <%= f.text_area :body %>
+    </div>
+
+
+      <div class="field">
+    <%= f.label :photo %><br />
+    <%= f.file_field :photo %>
+  </div>
+
+    <div class="field">
+      <%= f.label "Categories" %><br/>
+      <% for category in Category.all %>
+      <%= check_box_tag 'product[category_ids][]', category.id, @product.category_ids.include?(category.id), :id => dom_id(category) %>
+          <%= label_tag dom_id(category), category.name, :class => "check_box_label" %>
+      <% end %>
+    </div>
+
+        <div class="field">
+      <%= f.label "Sizes" %><br/>
+      <% for size in ProductSize.all %>
+      <%= check_box_tag 'product[productSize_ids][]', size.id, @product.productSize_ids.include?(size.id), :id => dom_id(size) %>
+          <%= label_tag dom_id(size), size.productSize, :class => "check_box_label" %>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.label "Nyckelord" %>
+      <%= f.text_field :keyword_list %>
+    </div>
+    
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

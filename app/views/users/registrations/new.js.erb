@@ -1,0 +1,4 @@
+setTimeout(function() {
+    $('.tipActivated').html('');
+    $('.tipActivated').append('<%= escape_javascript(render :partial => "devise/registrations/new") %>');
+}, 300);

@@ -1,0 +1,15 @@
+<h3><%= @retailer.title %></h3>
+
+<div class="rnfo">
+  <span class="resultsHeader">Frakt</span><span class="resultsHeader right"><%= number_to_sek(@retailer.profile.shippingCost) %></span>
+  <hr/>
+  <h3>Betala med:</h3>
+  <% form_for @retailer do |f| %>
+      <%= f.fields_for :profile do |p| %>
+                  <span style="float: left; width: 50%;"><%= p.check_box :creditCard %> <span>Kreditkort: </span><br/>
+                    <%= p.check_box :invoice %> <span>Räkning: </span></span>
+                  <span style="float: right; width: 50%;"><%= p.check_box :prepaid %> <span>Postförskott: </span><br/>
+                    <%= p.check_box :internetBank %> <span>Internetbank: </span></span>
+      <% end %>
+  <% end %>
+</div>

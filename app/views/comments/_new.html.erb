@@ -1,0 +1,12 @@
+<% content_for :head do %>
+    <%= javascript_include_tag 'comments' %>
+<% end %>
+
+
+<% if current_user %>
+<span class="smallHeader" id="nComment">Ny kommentar</span>
+<br/><br id="commentBreak"/>
+<%= render 'comments/form' %>
+<% else %>
+<span class="smallHeader" id="nLComment"><%= link_to 'Ny Kommentar', new_user_session_path, :remote => true %></span>
+<% end %>

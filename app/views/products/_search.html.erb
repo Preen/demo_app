@@ -1,0 +1,16 @@
+<% if @product.nil? %>
+
+<% else %>
+
+    <div class="productInfo">
+
+  <div class="picture"><%= image_tag product.photo.url(:small) %></div>
+  <div class="pinfo">
+    <h2><%= link_to product.title, product %></h2>
+
+    <p><%= product.body.html_safe %></p>
+  </div>
+  <div style="clear:both"></div>
+</div>
+
+<% end %>

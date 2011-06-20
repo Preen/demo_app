@@ -1,0 +1,21 @@
+<div class="paddedContent">
+  <div class="productPicture"><%= image_tag product.photo.url(:medium) %></div>
+
+  <%= div_for product do %>
+      <h1>
+        <%= product.title %>
+      </h1>
+
+      <p><%= product.body.html_safe %></p>
+
+
+      <% if current_user %>
+          <% if current_user.admin? %>
+              <span class="actions">
+                    <%= link_to "Edit", edit_product_path(product) %>
+                <%= link_to "Delete", product, :confirm => "Are you sure?", :method => :delete %>
+              </span>
+          <% end %>
+      <% end %>
+  <% end %>
+</div>

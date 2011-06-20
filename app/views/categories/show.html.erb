@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @category.name %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @category.user_id %>
+</p>
+<p>
+  <b>Produkter:</b>
+  <% @category.products.each do |product| %>
+      <%= product.title %>
+      <% product.prices.each do |prices| %>
+      <%= prices.price %>
+      <% end %>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>

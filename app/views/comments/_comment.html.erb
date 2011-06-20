@@ -1,0 +1,22 @@
+<%= div_for comment do %>
+
+        <div class="a">
+      <div class="b">
+        <div class="body">
+          <div class="commentsTitle"><%= link_to comment.user.username, comment.user %></div>
+
+          <p><%= comment.body %></p>
+
+          <div class="userInfo">Inlagt för <%= time_ago_in_words(comment.created_at) %> sen
+            av <%= comment.user.username %></div>
+
+          <% if current_user && current_user.admin? %>
+              <%= link_to 'Destroy', comment, :confirm => 'Are you sure?', :method => :delete, :remote => true %>
+          <% end %>
+        </div>
+        <div class="image"><%= gravatar_image_tag(comment.user.email, :alt => comment.user.email, :gravatar => {:size => 80, :default => 'http://localhost:3000/images/comments/default.jpg'}) %></div>
+        <div class="clearBoth"></div>
+      </div>
+    </div>
+
+<% end %>
